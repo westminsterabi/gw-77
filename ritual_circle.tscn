@@ -1,0 +1,35 @@
+[gd_scene load_steps=4 format=3 uid="uid://bidikeoy2u751"]
+
+[ext_resource type="Texture2D" uid="uid://crg8563d8h5lc" path="res://circle.png" id="1_mt0mo"]
+[ext_resource type="Script" path="res://ritual_circle.gd" id="1_pea47"]
+[ext_resource type="PackedScene" uid="uid://y63xsfuoa0m" path="res://toggle.tscn" id="2_p584u"]
+
+[node name="ritual_circle" type="Node2D"]
+script = ExtResource("1_pea47")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+visible = false
+position = Vector2(141, 75)
+scale = Vector2(0.758273, 0.758273)
+color = Color(1, 0.61, 0.61, 1)
+polygon = PackedVector2Array(550, 8, 623, 14, 693, 35, 745, 71, 787, 113, 816, 149, 842, 202, 861, 259, 865, 321, 862, 356, 854, 405, 834, 452, 800, 502, 773, 532, 714, 579, 662, 599, 599, 615, 531, 617, 480, 609, 420, 589, 371, 559, 330, 521, 295, 477, 267, 429, 253, 383, 243, 315, 248, 261, 266, 199, 299, 140, 335, 102, 371, 68, 418, 41, 459, 25, 498, 13)
+
+[node name="Circle" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(599, 340)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("1_mt0mo")
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="toggle" parent="Node2D" instance=ExtResource("2_p584u")]
+offset_left = 547.0
+offset_top = 30.0
+offset_right = 547.0
+offset_bottom = 30.0
+
+[node name="toggle2" parent="Node2D" instance=ExtResource("2_p584u")]
+offset_left = 669.0
+offset_top = 51.0
+offset_right = 669.0
+offset_bottom = 51.0
