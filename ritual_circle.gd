@@ -7,7 +7,9 @@ var INNER_CIRCLE_RADIUS: int = 250
 var OUTER_CIRCLE_RADIUS: int = 300
 var DEGREES_IN_CIRCLE = 360
 
-const Toggles = preload("res://toggle.tscn")
+var NUM_WEDGES = 10
+
+const toggle_switches = preload("res://toggle.tscn")
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass
@@ -43,15 +45,16 @@ func _plot_dividers(wedge_coords):
 func _draw():
 	draw_circle(Vector2(CIRCLE_CENTER_X, CIRCLE_CENTER_Y), INNER_CIRCLE_RADIUS, Color.CORNFLOWER_BLUE)
 	draw_circle(Vector2(550, 300), 275, Color.TRANSPARENT)
-	var num_wedges: int = 10
-	var dividers = _divvy_circle(INNER_CIRCLE_RADIUS, num_wedges)
+	var dividers = _divvy_circle(INNER_CIRCLE_RADIUS, NUM_WEDGES)
 	_plot_dividers(dividers)
-	var toggles = _divvy_circle(OUTER_CIRCLE_RADIUS, num_wedges)
-	for toggler in toggles: 
-		var toggle_button = Toggles.instantiate()
+	var toggle_coords = _divvy_circle(OUTER_CIRCLE_RADIUS, NUM_WEDGES)
+	var toggle_switch_arr = []
+	for i in range(len(toggle_coords)): 
+		var toggle_button = toggle_switches.instantiate()
+		toggle_button.id = i
 		add_child(toggle_button)
-		toggle_button.set_position(toggler[1] + Vector2(-15, -15))
-		draw_circle(toggler[1], 5, Color.CADET_BLUE)
+		toggle_button.set_position(toggle_coords[i][1] + Vector2(-15, -15))
+		draw_circle(toggle_coords[i][1], 5, Color.CADET_BLUE)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):

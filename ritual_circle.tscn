@@ -1,8 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://bidikeoy2u751"]
+[gd_scene load_steps=3 format=3 uid="uid://bidikeoy2u751"]
 
 [ext_resource type="Texture2D" uid="uid://crg8563d8h5lc" path="res://circle.png" id="1_mt0mo"]
 [ext_resource type="Script" path="res://ritual_circle.gd" id="1_pea47"]
-[ext_resource type="PackedScene" uid="uid://y63xsfuoa0m" path="res://toggle.tscn" id="2_p584u"]
 
 [node name="ritual_circle" type="Node2D"]
 script = ExtResource("1_pea47")
@@ -21,15 +20,3 @@ scale = Vector2(0.7, 0.7)
 texture = ExtResource("1_mt0mo")
 
 [node name="Node2D" type="Node2D" parent="."]
-
-[node name="toggle" parent="Node2D" instance=ExtResource("2_p584u")]
-offset_left = 547.0
-offset_top = 30.0
-offset_right = 547.0
-offset_bottom = 30.0
-
-[node name="toggle2" parent="Node2D" instance=ExtResource("2_p584u")]
-offset_left = 669.0
-offset_top = 51.0
-offset_right = 669.0
-offset_bottom = 51.0
