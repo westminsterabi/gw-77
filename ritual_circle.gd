@@ -1,13 +1,14 @@
 extends Node2D
 
-var CIRCLE_CENTER_X = 550
-var CIRCLE_CENTER_Y = 300
+const CIRCLE_CENTER_X = 550
+const CIRCLE_CENTER_Y = 300
 
-var INNER_CIRCLE_RADIUS: int = 250
-var OUTER_CIRCLE_RADIUS: int = 300
-var DEGREES_IN_CIRCLE = 360
+const INNER_CIRCLE_RADIUS: int = 250
+const OUTER_CIRCLE_RADIUS: int = 275
+const DEGREES_IN_CIRCLE = 360
 
-var NUM_WEDGES = 10
+const NUM_WEDGES = 10
+const DOT_OFFSET = Vector2(-15, -15)
 
 const toggle_switches = preload("res://toggle.tscn")
 # Called when the node enters the scene tree for the first time.
@@ -41,20 +42,28 @@ func _plot_dividers(wedge_coords):
 	for i in wedge_coords: 
 		print(i)
 		draw_line(i[0], i[1], Color.WHITE_SMOKE, 2.0)
+		
+func plot_toggles(toggle_coords):
+	# iterate through the list of coordinates
+	for i in range(len(toggle_coords)): 
+		# make a new switch and assign its ID to current idx
+		var toggle_button = toggle_switches.instantiate()
+		toggle_button.id = i
+		add_child(toggle_button)
+		# set the position of the new button to our point
+		toggle_button.set_position(toggle_coords[i][1] + DOT_OFFSET)
+		# draw a little dot as well
+		draw_circle(toggle_coords[i][1], 10, Color.DARK_RED)
 	
+
 func _draw():
-	draw_circle(Vector2(CIRCLE_CENTER_X, CIRCLE_CENTER_Y), INNER_CIRCLE_RADIUS, Color.CORNFLOWER_BLUE)
+	draw_circle(Vector2(CIRCLE_CENTER_X, CIRCLE_CENTER_Y), INNER_CIRCLE_RADIUS, Color.DARK_RED)
 	draw_circle(Vector2(550, 300), 275, Color.TRANSPARENT)
 	var dividers = _divvy_circle(INNER_CIRCLE_RADIUS, NUM_WEDGES)
 	_plot_dividers(dividers)
 	var toggle_coords = _divvy_circle(OUTER_CIRCLE_RADIUS, NUM_WEDGES)
-	var toggle_switch_arr = []
-	for i in range(len(toggle_coords)): 
-		var toggle_button = toggle_switches.instantiate()
-		toggle_button.id = i
-		add_child(toggle_button)
-		toggle_button.set_position(toggle_coords[i][1] + Vector2(-15, -15))
-		draw_circle(toggle_coords[i][1], 5, Color.CADET_BLUE)
+	plot_toggles(toggle_coords)
+	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
